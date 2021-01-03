@@ -12,4 +12,9 @@ class PostController extends Controller
     use DisableAuthorization;
     protected $model = Post::class;
 
+    protected function includes() : array
+    {
+        return ['author', 'theme'];
+    }
+
 }

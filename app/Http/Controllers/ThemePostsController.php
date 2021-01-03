@@ -15,5 +15,13 @@ class ThemePostsController extends RelationController
 
     protected $relation = 'posts';
 
-
+    /**
+     * The relations that are loaded by default together with a resource.
+     *
+     * @return array
+     */
+    protected function alwaysIncludes() : array
+    {
+        return ['author'];
+    }
 }
