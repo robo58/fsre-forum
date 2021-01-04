@@ -9,6 +9,10 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title', 'content', 'author_id', 'theme_id'
+    ];
+
     protected $casts = [
         'created_at' => 'datetime:jS F, Y, H:i:s',
         'updated_at' => 'datetime:jS F, Y, H:i:s'
