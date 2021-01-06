@@ -13,6 +13,11 @@ class ThemeController extends Controller
     use DisableAuthorization;
     protected $model = Theme::class;
 
+    protected function includes() : array
+    {
+        return ['category'];
+    }
+
     protected function afterIndex(\Orion\Http\Requests\Request $request, Paginator $entities)
     {
         foreach ($entities as $theme) {

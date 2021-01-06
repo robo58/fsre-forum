@@ -29,6 +29,7 @@ Route::post('/login', function (Request $request) {
 
     $user = User::where('email', $request->email)->first();
 
+
     if (!$user || !Hash::check($request->password, $user->password)) {
         return response([
             'message' => ['These credentials do not match our records.']
@@ -36,7 +37,7 @@ Route::post('/login', function (Request $request) {
     }
 
     $token = $user->createToken('my-app-token')->plainTextToken;
-
+    $user->load('roles');
     $response = [
         'user' => $user,
         'token' => $token
@@ -65,6 +66,7 @@ Route::post('/register', function (Request $request) {
     $user->password = Hash::make($request->password);
     $user->save();
     $user->roles()->attach(1);
+    $user->load('roles');
 
 
     if (!$user || !Hash::check($request->password, $user->password)) {
@@ -90,6 +92,7 @@ $resources = [
     'posts' => 'PostController',
     'comments' => 'CommentController',
     'users' => 'UserController',
+    'roles'=>'RoleController'
 ];
 
 Route::group(['as' => 'api.'], function () use ($resources) {

@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     protected function includes() : array
     {
-        return ['posts'];
+        return ['posts', 'roles'];
     }
 
     protected function afterShow(\Orion\Http\Requests\Request $request, Model $entity)
